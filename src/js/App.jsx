@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import Pica from './Components/Pica'
+import Pizza from './Components/Pizza'
 
 import { clientActions } from 'Actions'
 
@@ -20,7 +20,7 @@ class App extends Component {
       onClick: this.onCenterClick
     }
 
-    this.picaItems = [
+    this.pizzaPieces = [
       {
         name: 'Skills'
       },
@@ -72,8 +72,8 @@ class App extends Component {
     const { screen } = this.props
     
     return (
-      <Pica
-        items={ this.picaItems }
+      <Pizza
+        pieces={ this.pizzaPieces }
         svgWidth={ screen.width }
         svgHeight={ screen.height }
         centerPiece={ this.centerPiece }

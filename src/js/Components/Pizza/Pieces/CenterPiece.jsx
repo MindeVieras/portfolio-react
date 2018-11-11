@@ -6,8 +6,14 @@ class CenterPiece extends Component {
 
   render() {
 
-    const { centerPiece, svgWidth, svgHeight, strokeWidth, strokeColor, fill, portrait } = this.props
-    let radius = 100
+    const {
+      centerPiece,
+      svgWidth, svgHeight,
+      strokeWidth, strokeColor, fill,
+      portrait
+    } = this.props
+    
+    let radius = 75
     let fillColor = fill
     let title, onCenterClick
     
@@ -60,7 +66,10 @@ class CenterPiece extends Component {
 }
 
 CenterPiece.propTypes = {
-  centerPiece: PropTypes.object.isRequired,
+  centerPiece: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.object
+  ]).isRequired,
   svgWidth: PropTypes.number.isRequired,
   svgHeight: PropTypes.number.isRequired,
   strokeWidth: PropTypes.number.isRequired,

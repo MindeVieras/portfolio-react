@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import { CenterPiece } from './Pieces'
 
-class Pica extends Component {
+class Pizza extends Component {
 
   constructor(props) {
     super(props)
@@ -25,9 +25,14 @@ class Pica extends Component {
 
   render() {
 
-    const { svgWidth, svgHeight, centerPiece } = this.state
+    const {
+      pieces, centerPiece,
+      svgWidth, svgHeight,
+      strokeWidth, strokeColor, fill,
+      portrait
+    } = this.state
 
-    // console.log(svgWidth)
+    // console.log(items)
 
     // const { centerPiece, pieces } = items
     // const piecesProps = makePiecesPropsArray(pieces, width, height)
@@ -64,18 +69,16 @@ class Pica extends Component {
         height={ svgHeight }
       >
         {centerPiece &&
-          <CenterPiece { ...this.state } />
+          <CenterPiece
+            centerPiece={ centerPiece }
+            svgWidth={ svgWidth }
+            svgHeight={ svgHeight }
+            strokeWidth={ strokeWidth }
+            strokeColor={ strokeColor }
+            fill={ fill }
+            portrait={ portrait }
+          />
         }
-
-        {/* Test circle */}
-        <circle 
-          cx={ 100 } 
-		    	cy={ 500 }
-          r={ 50 }
-          stroke={ this.state.strokeColor }
-          strokeWidth={ this.state.strokeWidth }
-		    	fill={ this.state.fill }
-        />
 
         {/* { picaPieces } */}
 
@@ -196,23 +199,26 @@ class Pica extends Component {
 //   return points
 // }
 
-Pica.propTypes = {
-  items: PropTypes.array.isRequired,
+Pizza.propTypes = {
+  pieces: PropTypes.array.isRequired,
+  centerPiece: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.object
+  ]),
   svgWidth: PropTypes.number,
   svgHeight: PropTypes.number,
-  centerPiece: PropTypes.object,
   strokeWidth: PropTypes.number,
   strokeColor: PropTypes.string,
   fill: PropTypes.string
 }
 
-Pica.defaultProps = {
+Pizza.defaultProps = {
+  centerPiece: false,
   svgWidth: 320,
   svgHeight: 320,
-  centerPiece: null,
   strokeWidth: 2,
   strokeColor: 'black',
   fill: 'none'
 }
 
-export default Pica
+export default Pizza
