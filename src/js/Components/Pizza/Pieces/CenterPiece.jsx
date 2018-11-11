@@ -8,7 +8,7 @@ class CenterPiece extends Component {
 
     const {
       centerPiece,
-      svgWidth, svgHeight,
+      svgWidth, svgHeight, center,
       strokeWidth, strokeColor, fill,
       portrait
     } = this.props
@@ -52,8 +52,8 @@ class CenterPiece extends Component {
         }
 
         <circle 
-          cx={ svgWidth / 2 } 
-		    	cy={ svgHeight / 2 }
+          cx={ center.x } 
+		    	cy={ center.y }
           r={ radius }
           stroke={ strokeColor }
           strokeWidth={ strokeWidth }
@@ -72,6 +72,7 @@ CenterPiece.propTypes = {
   ]).isRequired,
   svgWidth: PropTypes.number.isRequired,
   svgHeight: PropTypes.number.isRequired,
+  center: PropTypes.object.isRequired,
   strokeWidth: PropTypes.number.isRequired,
   strokeColor: PropTypes.string.isRequired,
   fill: PropTypes.string.isRequired,

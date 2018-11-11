@@ -7,32 +7,23 @@ class Piece extends Component {
   render() {
 
     const {
-      line1, line2,
+      centerPiece,
       svgWidth, svgHeight,
+      strokeWidth, strokeColor, fill,
+      portrait
     } = this.props
-
-    // let perimeterPart = svgPerimeter / totalPieces
-    // // console.log(perimeterPart)
-    let startPoint = {
-      x: svgWidth / 2,
-      y: svgHeight / 2
-    }
-
-    // let line1 = {
-    //   x: 0,
-    //   y: 0
-    // }
-
+    
     return (
       <g>
         <path
-          fill="rgba(0,0,0,0.5)"
-          stroke="red"
-          d={`
-            M ${startPoint.x} ${startPoint.y}
-            L ${line1.x} ${line1.y}
-            L ${line2.x} ${line2.y} Z
-          `}
+          fill={ fill }
+          stroke={ strokeColor }
+          strokeWidth={ strokeWidth }
+          // d={`
+          //   M ${startPoint.x} ${startPoint.y}
+          //   L ${line1.x} ${line1.y}
+          //   L ${line2.x} ${line2.y} Z
+          // `}
         />
       </g>
     )
@@ -40,25 +31,16 @@ class Piece extends Component {
 }
 
 Piece.propTypes = {
-  line1: PropTypes.shape({
-    x: PropTypes.number,
-    y: PropTypes.number
-  }).isRequired,
-  line2: PropTypes.shape({
-    x: PropTypes.number,
-    y: PropTypes.number
-  }).isRequired,
+  centerPiece: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.object
+  ]).isRequired,
   svgWidth: PropTypes.number.isRequired,
   svgHeight: PropTypes.number.isRequired,
-  // svgCenter: PropTypes.shape({
-  //   x: PropTypes.number,
-  //   y: PropTypes.number
-  // }).isRequired,
-  // svgPerimeter: PropTypes.number.isRequired,
-  // index: PropTypes.number.isRequired,
-  // totalPieces: PropTypes.number.isRequired,
-  // centerPieceEnabled: PropTypes.bool.isRequired,
-  // centerPiece: PropTypes.object
+  strokeWidth: PropTypes.number.isRequired,
+  strokeColor: PropTypes.string.isRequired,
+  fill: PropTypes.string.isRequired,
+  portrait: PropTypes.bool.isRequired
 }
 
 // Piece.defaultProps = {

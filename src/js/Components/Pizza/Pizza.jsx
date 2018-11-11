@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { CenterPiece } from './Pieces'
+import { CenterPiece, Piece } from './Pieces'
 
 class Pizza extends Component {
 
@@ -11,6 +11,10 @@ class Pizza extends Component {
 
     this.state = {
       ...props,
+      center: {
+        x: props.svgWidth / 2,
+        y: props.svgHeight / 2
+      },
       portrait: props.svgWidth < props.svgHeight
     }
   }
@@ -19,6 +23,10 @@ class Pizza extends Component {
     
     this.setState({
       ...nextProps,
+      center: {
+        x: nextProps.svgWidth / 2,
+        y: nextProps.svgHeight / 2
+      },
       portrait: nextProps.svgWidth < nextProps.svgHeight
     })
   }
@@ -27,41 +35,27 @@ class Pizza extends Component {
 
     const {
       pieces, centerPiece,
-      svgWidth, svgHeight,
+      svgWidth, svgHeight, center,
       strokeWidth, strokeColor, fill,
       portrait
     } = this.state
 
-    // console.log(items)
+    let pizzaPieces = pieces.map((piece, i) => {
 
-    // const { centerPiece, pieces } = items
-    // const piecesProps = makePiecesPropsArray(pieces, width, height)
-
-    // let svgConfig = {
-    //   centerPieceEnabled,
-    //   centerPiece,
-    //   totalPieces: pieces.length,
-    //   svgWidth: width,
-    //   svgHeight: height,
-    //   svgCenter: {
-    //     x: width / 2,
-    //     y: height / 2
-    //   },
-    //   svgPerimeter: (width + height) * 2
-    // }
-    // console.log(piecesProps)
-    // let picaPieces = piecesProps.map((props, i) => {
-
-    //   let line1 = makeLine1()
-
-    //   return (
-    //     <Piece
-    //       key={ i }
-    //       { ...props }
-    //       { ...svgConfig }
-    //     />
-    //   )
-    // })
+      return (
+        <Piece
+          key={ i }
+          { ...piece }
+          centerPiece={ centerPiece }
+          svgWidth={ svgWidth }
+          svgHeight={ svgHeight }
+          strokeWidth={ strokeWidth }
+          strokeColor={ strokeColor }
+          fill={ fill }
+          portrait={ portrait }
+        />
+      )
+    })
 
     return (
       <svg
@@ -73,6 +67,7 @@ class Pizza extends Component {
             centerPiece={ centerPiece }
             svgWidth={ svgWidth }
             svgHeight={ svgHeight }
+            center={ center }
             strokeWidth={ strokeWidth }
             strokeColor={ strokeColor }
             fill={ fill }
@@ -80,7 +75,7 @@ class Pizza extends Component {
           />
         }
 
-        {/* { picaPieces } */}
+        { pizzaPieces }
 
       </svg>
     )
