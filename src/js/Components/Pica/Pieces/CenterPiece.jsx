@@ -9,10 +9,11 @@ class CenterPiece extends Component {
     const { items, svgWidth, svgHeight, strokeWidth, strokeColor, fill, portrait } = this.props
     let radius = 100
     let fillColor = fill
+    let title
     
     if(items.centerPiece) {
       
-      let { centerSize, centerFill } = items.centerPiece
+      let { centerSize, centerFill, centerTitle } = items.centerPiece
       
       if(centerSize) {
         if(typeof centerSize === 'string' && centerSize.endsWith('%')) {
@@ -28,10 +29,17 @@ class CenterPiece extends Component {
       
       if(centerFill)
         fillColor = centerFill
+      
+      if(centerTitle) {
+        title = centerTitle
+      }
     }
 
     return (
       <g>
+        {title &&
+          <title>{ title }</title>        
+        }
         <circle 
           cx={ svgWidth / 2 } 
 		    	cy={ svgHeight / 2 }

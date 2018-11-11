@@ -10,7 +10,8 @@ import { clientActions } from 'Actions'
 const picaItems = {
   centerPiece: {
     centerSize: '25%', // number or percent
-    centerFill: 'PeachPuff'
+    centerFill: 'PeachPuff',
+    centerTitle: 'Skillset'
   },
   pieces: [
     {
