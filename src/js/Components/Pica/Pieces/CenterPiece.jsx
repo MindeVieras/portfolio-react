@@ -6,14 +6,26 @@ class CenterPiece extends Component {
 
   render() {
 
-    const { items, svgWidth, svgHeight, strokeWidth, strokeColor, fill } = this.props
+    const { items, svgWidth, svgHeight, strokeWidth, strokeColor, fill, portrait } = this.props
     let radius = 100
     let fillColor = fill
-
+    
     if(items.centerPiece) {
+      
       let { centerSize, centerFill } = items.centerPiece
-      if(centerSize)
-        radius = centerSize / 2
+      
+      if(centerSize) {
+        if(typeof centerSize === 'string' && centerSize.endsWith('%')) {
+          
+          let percent = parseFloat(centerSize.substring(0, centerSize.length - 1))
+          
+          radius = ((percent / 100) * (portrait ? svgWidth : svgHeight)) / 2
+        }
+        else {
+          radius = parseFloat(centerSize) / 2
+        }
+      }
+      
       if(centerFill)
         fillColor = centerFill
     }
@@ -39,7 +51,8 @@ CenterPiece.propTypes = {
   svgHeight: PropTypes.number.isRequired,
   strokeWidth: PropTypes.number.isRequired,
   strokeColor: PropTypes.string.isRequired,
-  fill: PropTypes.string.isRequired
+  fill: PropTypes.string.isRequired,
+  portrait: PropTypes.bool.isRequired
 }
 
 export default CenterPiece

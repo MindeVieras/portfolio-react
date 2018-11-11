@@ -10,14 +10,16 @@ class Pica extends Component {
     super(props)
 
     this.state = {
-      ...props
+      ...props,
+      portrait: props.svgWidth < props.svgHeight
     }
   }
 
   componentWillReceiveProps(nextProps) {
     
     this.setState({
-      ...nextProps
+      ...nextProps,
+      portrait: nextProps.svgWidth < nextProps.svgHeight
     })
   }
 
