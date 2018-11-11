@@ -6,14 +6,14 @@ class CenterPiece extends Component {
 
   render() {
 
-    const { items, svgWidth, svgHeight, strokeWidth, strokeColor, fill, portrait } = this.props
+    const { centerPiece, svgWidth, svgHeight, strokeWidth, strokeColor, fill, portrait } = this.props
     let radius = 100
     let fillColor = fill
-    let title
+    let title, onCenterClick
     
-    if(items.centerPiece) {
+    if(centerPiece) {
       
-      let { centerSize, centerFill, centerTitle } = items.centerPiece
+      let { centerSize, centerFill, centerTitle, onClick } = centerPiece
       
       if(centerSize) {
         if(typeof centerSize === 'string' && centerSize.endsWith('%')) {
@@ -33,28 +33,34 @@ class CenterPiece extends Component {
       if(centerTitle) {
         title = centerTitle
       }
+
+      if(onClick)
+        onCenterClick = () => onClick(this.props)
     }
 
     return (
-      <g>
+      <g onClick={ onCenterClick }>
+
         {title &&
           <title>{ title }</title>        
         }
+
         <circle 
           cx={ svgWidth / 2 } 
 		    	cy={ svgHeight / 2 }
           r={ radius }
           stroke={ strokeColor }
           strokeWidth={ strokeWidth }
-		    	fill={ fillColor }
+          fill={ fillColor }
         />
+
       </g>
     )
   }
 }
 
 CenterPiece.propTypes = {
-  items: PropTypes.object.isRequired,
+  centerPiece: PropTypes.object.isRequired,
   svgWidth: PropTypes.number.isRequired,
   svgHeight: PropTypes.number.isRequired,
   strokeWidth: PropTypes.number.isRequired,

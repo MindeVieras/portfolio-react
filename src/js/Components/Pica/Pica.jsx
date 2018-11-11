@@ -197,10 +197,10 @@ class Pica extends Component {
 // }
 
 Pica.propTypes = {
-  items: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
   svgWidth: PropTypes.number,
   svgHeight: PropTypes.number,
-  centerPiece: PropTypes.bool,
+  centerPiece: PropTypes.object,
   strokeWidth: PropTypes.number,
   strokeColor: PropTypes.string,
   fill: PropTypes.string
@@ -209,7 +209,7 @@ Pica.propTypes = {
 Pica.defaultProps = {
   svgWidth: 320,
   svgHeight: 320,
-  centerPiece: false,
+  centerPiece: null,
   strokeWidth: 2,
   strokeColor: 'black',
   fill: 'none'

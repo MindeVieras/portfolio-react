@@ -7,35 +7,41 @@ import Pica from './Components/Pica'
 
 import { clientActions } from 'Actions'
 
-const picaItems = {
-  centerPiece: {
-    centerSize: '25%', // number or percent
-    centerFill: 'PeachPuff',
-    centerTitle: 'Skillset'
-  },
-  pieces: [
-    {
-      name: 'Skills'
-    },
-    {
-      name: 'Projects'
-    },
-    {
-      name: 'Experience'
-    },
-    // {
-    //   name: 'Interests'
-    // },
-    // {
-    //   name: 'Summary'
-    // },
-    // {
-    //   name: 'Expertise'
-    // }
-  ]
-}
-
 class App extends Component {
+
+  constructor(props) {
+    super(props)
+
+    this.centerPiece = {
+      id: 'center_piece_id',
+      centerSize: '25%', // number or percent
+      centerFill: 'PeachPuff',
+      centerTitle: 'Skillset',
+      onClick: this.onCenterClick
+    }
+
+    this.picaItems = [
+      {
+        name: 'Skills'
+      },
+      {
+        name: 'Projects'
+      },
+      {
+        name: 'Experience'
+      }
+      // {
+      //   name: 'Interests'
+      // },
+      // {
+      //   name: 'Summary'
+      // },
+      // {
+      //   name: 'Expertise'
+      // }
+    ]
+
+  }
 
   componentDidMount() {
     // Add resize event listener
@@ -57,16 +63,20 @@ class App extends Component {
     dispatch(clientActions.setScreen({ width, height, orientation }))
   }
 
+  onCenterClick(centerPieceProps) {
+    console.log(centerPieceProps)
+  }
+
   render() {
 
     const { screen } = this.props
     
     return (
       <Pica
-        items={ picaItems }
+        items={ this.picaItems }
         svgWidth={ screen.width }
         svgHeight={ screen.height }
-        centerPiece={ true }
+        centerPiece={ this.centerPiece }
         strokeWidth={ 4 }
         strokeColor="red"
         fill="grey"
