@@ -40,15 +40,19 @@ class Pizza extends Component {
       portrait
     } = this.state
 
-    let pizzaPieces = pieces.map((piece, i) => {
+    const totalPieces = pieces.length
 
+    let pizzaPieces = pieces.map((piece, i) => {
       return (
         <Piece
           key={ i }
           { ...piece }
+          index={ i }
+          total={ totalPieces }
           centerPiece={ centerPiece }
           svgWidth={ svgWidth }
           svgHeight={ svgHeight }
+          center={ center }
           strokeWidth={ strokeWidth }
           strokeColor={ strokeColor }
           fill={ fill }
@@ -61,6 +65,9 @@ class Pizza extends Component {
       <svg
         width={ svgWidth }
         height={ svgHeight }
+        style={{
+          display: `block`
+        }}
       >
         {centerPiece &&
           <CenterPiece
@@ -81,118 +88,6 @@ class Pizza extends Component {
     )
   }
 }
-
-// function makePiecesPropsArray(pieces, svgWidth, svgHeight) {
-
-//   const perimeter = (svgWidth + svgHeight) * 2
-//   const startPoint = 0
-
-
-//   const top = svgWidth
-//   const right = svgWidth + svgHeight
-//   const bottom = (svgWidth * 2) + svgHeight
-//   const left = perimeter
-
-//   let piecesProps = []
-
-//   // min 3 pieces required
-//   if (pieces.length > 2) {
-
-//     const perimeterPart = perimeter / pieces.length
-//     console.log(perimeterPart)
-
-//     piecesProps = pieces.map((piece, i) => {
-
-//       let part = perimeterPart * i
-
-//       let point = {
-//         line1: {
-//           x: 0,
-//           y: 0
-//         },
-//         line2: {
-//           x: 0,
-//           y: 0
-//         },
-//         line3: {
-//           x: 0,
-//           y: 0
-//         }
-//       }
-
-//       // // make first svg piece
-//       // if (i === 0) {
-
-//       // }
-//       // make top svg edge
-//       if (part <= svgWidth) {
-//         point = {
-//           line1: {
-//             x: part,
-//             y: 0
-//           },
-//           line2: {
-//             x: perimeterPart,
-//             y: 0
-//           }
-//         }
-//       }
-//       // make right svg edge
-//       else if (part >= svgWidth && part <= svgWidth + svgHeight) {
-//         point = {
-//           line1: {
-//             x: 0,
-//             y: part - svgWidth
-//           },
-//           line2: {
-//             x: part,
-//             y: 0
-//           }
-//         }
-//       }
-//       // make bottom svg edge
-//       else if (part >= svgWidth + svgHeight && part <= (svgWidth * 2) + svgHeight) {
-//         point = {
-//           line1: {
-//             x: part - (svgWidth + svgHeight),
-//             y: svgHeight
-//           },
-//           line2: {
-//             x: part,
-//             y: 0
-//           }
-//         }
-//       }
-//       // make left svg edge
-//       else if (part >= (svgWidth * 2) + svgHeight && part < perimeter) {
-//         point = {
-//           line1: {
-//             x: 0,
-//             y: part - ((svgWidth * 2) + svgHeight)
-//           },
-//           line2: {
-//             x: part,
-//             y: 0
-//           }
-//         }
-//       }
-
-//       return point
-//     })
-//   }
-
-//   return parts
-// }
-
-// function makeLine1() {
-
-//   let points = {
-//     x: 0,
-//     y: 0
-//   }
-
-//   return points
-// }
 
 Pizza.propTypes = {
   pieces: PropTypes.array.isRequired,

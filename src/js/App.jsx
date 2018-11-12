@@ -29,16 +29,19 @@ class App extends Component {
       },
       {
         name: 'Experience'
+      },
+      {
+        name: 'Interests'
+      },
+      {
+        name: 'Summary'
+      },
+      {
+        name: 'Expertise'
+      },
+      {
+        name: 'Testing'
       }
-      // {
-      //   name: 'Interests'
-      // },
-      // {
-      //   name: 'Summary'
-      // },
-      // {
-      //   name: 'Expertise'
-      // }
     ]
 
   }
@@ -77,8 +80,8 @@ class App extends Component {
         svgWidth={ screen.width }
         svgHeight={ screen.height }
         centerPiece={ this.centerPiece }
-        strokeWidth={ 4 }
-        strokeColor="red"
+        strokeWidth={ 1 }
+        strokeColor="black"
         fill="grey"
       />
     )
