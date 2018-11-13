@@ -10,13 +10,24 @@ class Piece extends Component {
       index, total, centerPiece,
       svgWidth, svgHeight, center,
       strokeWidth, strokeColor, fill,
-      portrait,
+      portrait, spreadBy, offset,
       name
     } = this.props
-    
-    let firstPoint = makePoint(svgWidth, svgHeight, total, index, 0)
-    let lastPoint = makePoint(svgWidth, svgHeight, total, index, 1)
+
+    let firstPoint, lastPoint
+    // let dfirstPoint, dlastPoint
+
+    // if(spreadBy === 'degrees') {
+    // dfirstPoint = makeDegreesPoint(svgWidth, svgHeight, total, index, 0)
+    // dlastPoint = makeDegreesPoint(svgWidth, svgHeight, total, index, 0)
+    // }
+    // else {
+    firstPoint = makePerimeterPoint(svgWidth, svgHeight, total, index, offset)
+    lastPoint = makePerimeterPoint(svgWidth, svgHeight, total, index, offset + 1) // can be 0.5 for gaps!
+    // }
+
     let middlePoint = makeMiddlePoint(firstPoint, lastPoint)
+    // let dmiddlePoint = makeMiddlePoint(dfirstPoint, dlastPoint)
 
     return (
       <g>
@@ -31,12 +42,23 @@ class Piece extends Component {
             L ${lastPoint.x} ${lastPoint.y} Z
           `}
         />
+        {/* <path
+          fill={ fill }
+          stroke={ strokeColor }
+          strokeWidth={ strokeWidth }
+          d={`
+            M ${center.x} ${center.y}
+            L ${dfirstPoint.x} ${dfirstPoint.y}
+            L ${dmiddlePoint.x} ${dmiddlePoint.y}
+            L ${dlastPoint.x} ${dlastPoint.y} Z
+          `}
+        /> */}
       </g>
     )
   }
 }
 
-function makePoint(svgWidth, svgHeight, total, index, point) {
+function makePerimeterPoint(svgWidth, svgHeight, total, index, point) {
 
   const edge1 = svgWidth
   const edge2 = svgWidth + svgHeight
@@ -69,8 +91,56 @@ function makePoint(svgWidth, svgHeight, total, index, point) {
     y = svgHeight - (stepIndex - edge3)
   }
 
+  else if(point >= 1) {
+    x = (point - 1) * step
+    y = 0
+  }
+
   return {x, y}
 }
+
+// function makeDegreesPoint(svgWidth, svgHeight, total, index, point) {
+
+//   const edge1 = svgWidth
+//   const edge2 = svgWidth + svgHeight
+//   const edge3 = svgWidth + svgHeight + svgWidth
+//   const edge4 = svgWidth + svgHeight + svgWidth + svgHeight
+
+//   const step = 360 / total
+//   const stepIndex = step * (index + point)
+
+//   console.log(stepIndex)
+  
+//   let x = 0
+//   let y = 0
+  
+//   // if(stepIndex <= edge1) {
+//   //   x = stepIndex
+//   //   y = 0
+//   // }
+
+//   // else if(stepIndex > edge1 && stepIndex <= edge2) {
+//   //   x = svgWidth
+//   //   y = stepIndex - edge1
+//   // }
+
+//   // else if(stepIndex > edge2 && stepIndex <= edge3) {
+//   //   x = svgWidth - (stepIndex - edge2)
+//   //   y = svgHeight
+//   // }
+
+//   // else if(stepIndex > edge3 && stepIndex <= edge4) {
+//   //   x = 0
+//   //   y = svgHeight - (stepIndex - edge3)
+//   // }
+
+//   // else if(point >= 1) {
+//   //   x = (point - 1) * step
+//   //   y = 0
+//   // }
+
+//   return {x, y}
+// }
 
 function makeMiddlePoint(firstPoint, lastPoint) {
 
@@ -108,6 +178,8 @@ Piece.propTypes = {
   strokeColor: PropTypes.string.isRequired,
   fill: PropTypes.string.isRequired,
   portrait: PropTypes.bool.isRequired,
+  spreadBy: PropTypes.string.isRequired,
+  offset: PropTypes.number.isRequired,
   name: PropTypes.string
 }
 

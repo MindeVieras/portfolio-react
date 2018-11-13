@@ -37,7 +37,7 @@ class Pizza extends Component {
       pieces, centerPiece,
       svgWidth, svgHeight, center,
       strokeWidth, strokeColor, fill,
-      portrait
+      portrait, spreadBy, offset
     } = this.state
 
     const totalPieces = pieces.length
@@ -57,6 +57,8 @@ class Pizza extends Component {
           strokeColor={ strokeColor }
           fill={ fill }
           portrait={ portrait }
+          spreadBy={ spreadBy }
+          offset={ offset }
         />
       )
     })
@@ -99,7 +101,9 @@ Pizza.propTypes = {
   svgHeight: PropTypes.number,
   strokeWidth: PropTypes.number,
   strokeColor: PropTypes.string,
-  fill: PropTypes.string
+  fill: PropTypes.string,
+  spreadBy: PropTypes.string,
+  offset: PropTypes.number
 }
 
 Pizza.defaultProps = {
@@ -108,7 +112,9 @@ Pizza.defaultProps = {
   svgHeight: 320,
   strokeWidth: 2,
   strokeColor: 'black',
-  fill: 'none'
+  fill: 'none',
+  spreadBy: 'perimeter',
+  offset: 0
 }
 
 export default Pizza

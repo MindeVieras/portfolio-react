@@ -39,9 +39,9 @@ class App extends Component {
       {
         name: 'Expertise'
       },
-      {
-        name: 'Testing'
-      }
+      // {
+      //   name: 'Testing'
+      // }
     ]
 
   }
@@ -82,7 +82,9 @@ class App extends Component {
         centerPiece={ this.centerPiece }
         strokeWidth={ 1 }
         strokeColor="black"
-        fill="grey"
+        fill="none"
+        spreadBy="degrees"
+        offset={ 1 }
       />
     )
   }
