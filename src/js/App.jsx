@@ -39,9 +39,9 @@ class App extends Component {
       {
         name: 'Expertise'
       },
-      // {
-      //   name: 'Testing'
-      // }
+      {
+        name: 'Testing'
+      }
     ]
 
   }
@@ -80,11 +80,11 @@ class App extends Component {
         svgWidth={ screen.width }
         svgHeight={ screen.height }
         centerPiece={ this.centerPiece }
-        strokeWidth={ 1 }
-        strokeColor="black"
+        strokeWidth={ 2 }
+        strokeColor="red"
         fill="none"
         spreadBy="degrees"
-        offset={ 1 }
+        offset={ 0.5 }
       />
     )
   }
